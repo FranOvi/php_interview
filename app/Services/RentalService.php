@@ -10,13 +10,16 @@ class RentalService
 {
     public function index(array $request): Collection
     {
-        return $this->baseQuery($request)->get();
+        return $this->baseQuery($request)
+            ->select('*')
+            ->get();
     }
 
-    public function makeReport(array $request)
+    public function makeReport(array $request): Collection
     {
         return $this->baseQuery($request)
-            ->geoSearch($request['lat'], $request['lon'], $request['rad'])
+            ->select('id', 'title', 'latitude', 'longitude', 'advertiser', 'price', 'square_meter', 'rooms', 'bathrooms')
+            ->when($request['lat'] && $request['lon'], fn($q) => $q->geoSearch($request['lat'], $request['lon'], $request['rad'] ?? 10))
             ->get();
     }
 
