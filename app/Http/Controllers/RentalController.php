@@ -18,6 +18,11 @@ class RentalController extends Controller
         return $this->rentalService->index($request->all());
     }
 
+    public function report(Request $request)
+    {
+        return $this->rentalService->makeReport($request->all());
+    }
+
     public function avgPriceAt(RentalGeoRequest $request)
     {
         ['lat' => $lat, 'lon' => $lon, 'rad' => $rad] = $request->validated();
