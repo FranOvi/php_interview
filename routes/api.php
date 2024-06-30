@@ -6,4 +6,5 @@ use App\Http\Controllers\RentalController;
 use App\Http\Controllers\RentalImportController;
 
 Route::get('/rentals', [RentalController::class, 'index']);
+Route::get('/rentals/geo/avg-sqm-price', [RentalController::class, 'avgPriceAt']);
 Route::get('/rentals/import', RentalImportController::class);
